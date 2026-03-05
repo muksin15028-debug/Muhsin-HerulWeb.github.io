@@ -1,1 +1,778 @@
-# Muhsin-HerulWeb.github.io
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Perpustakaan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .header {
+            text-align: center;
+            color: white;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header h1 i {
+            margin-right: 15px;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-submit i {
+            margin-right: 8px;
+        }
+
+        /* Visitor List */
+        .visitor-list {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .list-header h2 {
+            color: #333;
+            font-size: 1.5em;
+        }
+
+        .list-header h2 i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 8px 15px;
+        }
+
+        .search-box i {
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 8px;
+            font-size: 14px;
+            width: 250px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .search-box input:focus {
+            outline: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #555;
+        }
+
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .btn-exit {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-exit:hover {
+            background: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        .btn-exit i {
+            margin-right: 5px;
+        }
+
+        /* Stats Container */
+        .stats-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-container h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+        }
+
+        .stats-container h2 i {
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .stat-card i {
+            font-size: 2.5em;
+            margin-right: 20px;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            margin: 100px auto;
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .modal-content h3 i {
+            margin-right: 10px;
+            color: #ff4757;
+        }
+
+        .modal-content p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-confirm,
+        .btn-cancel {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-confirm {
+            background: #ff4757;
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background: #ff6b81;
+            transform: scale(1.05);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .list-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 50px auto;
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .form-container,
+            .visitor-list,
+            .stats-container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-book-reader"></i> Absensi Perpustakaan</h1>
+            <p>Sistem Pencatatan Pengunjung Perpustakaan</p>
+        </header>
+
+        <!-- Form Absensi -->
+        <div class="form-container">
+            <h2><i class="fas fa-user-plus"></i> Form Pendaftaran Pengunjung</h2>
+            <form id="attendanceForm">
+                <div class="form-group">
+                    <label for="nama"><i class="fas fa-user"></i> Nama Lengkap:</label>
+                    <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+                </div>
+
+                <div class="form-group">
+                    <label for="nim"><i class="fas fa-id-card"></i> NIM/NIP:</label>
+                    <input type="text" id="nim" name="nim" required placeholder="Masukkan NIM atau NIP">
+                </div>
+
+                <div class="form-group">
+                    <label for="program_studi"><i class="fas fa-graduation-cap"></i> Program Studi/Jurusan:</label>
+                    <select id="program_studi" name="program_studi" required>
+                        <option value="">Pilih Program Studi</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                        <option value="Teknik Elektro">Teknik Elektro</option>
+                        <option value="Teknik Mesin">Teknik Mesin</option>
+                        <option value="Manajemen">Manajemen</option>
+                        <option value="Akuntansi">Akuntansi</option>
+                        <option value="Dosen">Dosen</option>
+                        <option value="Staff">Staff</option>
+                        <option value="Umum">Umum</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="keperluan"><i class="fas fa-clipboard-list"></i> Keperluan:</label>
+                    <select id="keperluan" name="keperluan" required>
+                        <option value="">Pilih Keperluan</option>
+                        <option value="Membaca">Membaca</option>
+                        <option value="Meminjam Buku">Meminjam Buku</option>
+                        <option value="Mengembalikan Buku">Mengembalikan Buku</option>
+                        <option value="Penelitian">Penelitian</option>
+                        <option value="Belajar Kelompok">Belajar Kelompok</option>
+                        <option value="Mencari Referensi">Mencari Referensi</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-sign-in-alt"></i> Masuk Perpustakaan
+                </button>
+            </form>
+        </div>
+
+        <!-- Daftar Pengunjung Hari Ini -->
+        <div class="visitor-list">
+            <div class="list-header">
+                <h2><i class="fas fa-users"></i> Daftar Pengunjung Hari Ini</h2>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari pengunjung...">
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table id="visitorTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>NIM/NIP</th>
+                            <th>Program Studi</th>
+                            <th>Keperluan</th>
+                            <th>Waktu Masuk</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitorList">
+                        <!-- Data akan ditambahkan melalui JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Statistik -->
+        <div class="stats-container">
+            <h2><i class="fas fa-chart-bar"></i> Statistik Hari Ini</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="totalVisitors">0</span>
+                        <span class="stat-label">Total Pengunjung</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-book-open"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="membacaCount">0</span>
+                        <span class="stat-label">Membaca</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="meminjamCount">0</span>
+                        <span class="stat-label">Meminjam</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-undo-alt"></i>
+                    <div class="stat-info">
+                        <span class="stat-value" id="mengembalikanCount">0</span>
+                        <span class="stat-label">Mengembalikan</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Absensi Perpustakaan. All rights reserved.</p>
+            <p id="currentDateTime"></p>
+        </footer>
+    </div>
+
+    <!-- Modal untuk konfirmasi keluar -->
+    <div id="exitModal" class="modal">
+        <div class="modal-content">
+            <h3><i class="fas fa-sign-out-alt"></i> Konfirmasi Keluar</h3>
+            <p>Apakah Anda yakin ingin mencatat pengunjung ini keluar?</p>
+            <div class="modal-buttons">
+                <button id="confirmExit" class="btn-confirm">Ya, Keluar</button>
+                <button id="cancelExit" class="btn-cancel">Batal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data pengunjung (akan disimpan di localStorage)
+        let visitors = JSON.parse(localStorage.getItem('visitors')) || [];
+
+        // Format waktu
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString('id-ID', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        // Format tanggal
+        function getCurrentDate() {
+            const now = new Date();
+            return now.toLocaleDateString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        // Update waktu di footer
+        function updateDateTime() {
+            document.getElementById('currentDateTime').innerHTML = 
+                `${getCurrentDate()} | ${getCurrentTime()}`;
+        }
+        setInterval(updateDateTime, 1000);
+
+        // Fungsi untuk menambah pengunjung baru
+        function addVisitor(event) {
+            event.preventDefault();
+            
+            const nama = document.getElementById('nama').value;
+            const nim = document.getElementById('nim').value;
+            const programStudi = document.getElementById('program_studi').value;
+            const keperluan = document.getElementById('keperluan').value;
+            
+            const newVisitor = {
+                id: Date.now(),
+                nama: nama,
+                nim: nim,
+                programStudi: programStudi,
+                keperluan: keperluan,
+                waktuMasuk: getCurrentTime(),
+                tanggal: new Date().toLocaleDateString('id-ID'),
+                status: 'active'
+            };
+            
+            visitors.push(newVisitor);
+            localStorage.setItem('visitors', JSON.stringify(visitors));
+            
+            // Reset form
+            document.getElementById('attendanceForm').reset();
+            
+            // Update tampilan
+            displayVisitors();
+            updateStats();
+            
+            // Notifikasi sukses
+            alert(`Selamat datang ${nama} di Perpustakaan!`);
+        }
+
+        // Fungsi untuk menampilkan daftar pengunjung
+        function displayVisitors() {
+            const visitorList = document.getElementById('visitorList');
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            // Filter pengunjung yang masih aktif (belum keluar) untuk hari ini
+            const today = new Date().toLocaleDateString('id-ID');
+            const activeVisitors = visitors.filter(v => 
+                v.status === 'active' && v.tanggal === today
+            );
+            
+            // Filter berdasarkan pencarian
+            const filteredVisitors = activeVisitors.filter(v => 
+                v.nama.toLowerCase().includes(searchTerm) ||
+                v.nim.toLowerCase().includes(searchTerm) ||
+                v.programStudi.toLowerCase().includes(searchTerm) ||
+                v.keperluan.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredVisitors.length === 0) {
+                visitorList.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center; padding: 30px;">
+                            <i class="fas fa-users" style="font-size: 48px; color: #ccc; margin-bottom: 10px; display: block;"></i>
+                            Belum ada pengunjung hari ini
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            visitorList.innerHTML = filteredVisitors.map((visitor, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${visitor.nama}</td>
+                    <td>${visitor.nim}</td>
+                    <td>${visitor.programStudi}</td>
+                    <td>${visitor.keperluan}</td>
+                    <td>${visitor.waktuMasuk}</td>
+                    <td>
+                        <button class="btn-exit" onclick="showExitModal(${visitor.id})">
+                            <i class="fas fa-sign-out-alt"></i> Keluar
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Fungsi untuk update statistik
+        function updateStats() {
+            const today = new Date().toLocaleDateString('id-ID');
+            const todayVisitors = visitors.filter(v => v.tanggal === today);
+            
+            // Total pengunjung
+            document.getElementById('totalVisitors').textContent = todayVisitors.length;
+            
+            // Hitung berdasarkan keperluan
+            const membacaCount = todayVisitors.filter(v => v.keperluan === 'Membaca').length;
+            const meminjamCount = todayVisitors.filter(v => v.keperluan === 'Meminjam Buku').length;
+            const mengembalikanCount = todayVisitors.filter(v => v.keperluan === 'Mengembalikan Buku').length;
+            
+            document.getElementById('membacaCount').textContent = membacaCount;
+            document.getElementById('meminjamCount').textContent = meminjamCount;
+            document.getElementById('mengembalikanCount').textContent = mengembalikanCount;
+        }
+
+        // Fungsi untuk menampilkan modal konfirmasi keluar
+        let currentExitId = null;
+
+        function showExitModal(id) {
+            currentExitId = id;
+            document.getElementById('exitModal').style.display = 'block';
+        }
+
+        // Fungsi untuk memproses keluar pengunjung
+        function processExit() {
+            if (currentExitId) {
+                const visitorIndex = visitors.findIndex(v => v.id === currentExitId);
+                
+                if (visitorIndex !== -1) {
+                    // Hapus pengunjung dari daftar (atau bisa juga diubah statusnya menjadi inactive)
+                    visitors.splice(visitorIndex, 1);
+                    localStorage.setItem('visitors', JSON.stringify(visitors));
+                    
+                    // Update tampilan
+                    displayVisitors();
+                    updateStats();
+                }
+            }
+            
+            // Tutup modal
+            document.getElementById('exitModal').style.display = 'none';
+            currentExitId = null;
+        }
+
+        // Fungsi untuk pencarian
+        function searchVisitor() {
+            displayVisitors();
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submit
+            document.getElementById('attendanceForm').addEventListener('submit', addVisitor);
+            
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', searchVisitor);
+            
+            // Modal buttons
+            document.getElementById('confirmExit').addEventListener('click', processExit);
+            document.getElementById('cancelExit').addEventListener('click', function() {
+                document.getElementById('exitModal').style.display = 'none';
+                currentExitId = null;
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('exitModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    currentExitId = null;
+                }
+            });
+            
+            // Tampilkan data awal
+            displayVisitors();
+            updateStats();
+            updateDateTime();
+        });
+
+        // Bersihkan data lama (lebih dari 1 hari) secara otomatis
+        function cleanupOldData() {
+            const today = new Date().toLocaleDateString('id-ID');
+            visitors = visitors.filter(v => v.tanggal === today);
+            localStorage.setItem('visitors', JSON.stringify(visitors));
+            displayVisitors();
+            updateStats();
+        }
+
+        // Jalankan pembersihan data saat halaman dimuat
+        cleanupOldData();
+    </script>
+</body>
+</html>
