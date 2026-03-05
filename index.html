@@ -447,22 +447,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="program_studi"><i class="fas fa-graduation-cap"></i> Program Studi/Jurusan:</label>
-                    <select id="program_studi" name="program_studi" required>
-                        <option value="">Pilih Program Studi</option>
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Teknik Elektro">Teknik Elektro</option>
-                        <option value="Teknik Mesin">Teknik Mesin</option>
-                        <option value="Manajemen">Manajemen</option>
-                        <option value="Akuntansi">Akuntansi</option>
-                        <option value="Dosen">Dosen</option>
-                        <option value="Staff">Staff</option>
-                        <option value="Umum">Umum</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label for="keperluan"><i class="fas fa-clipboard-list"></i> Keperluan:</label>
                     <select id="keperluan" name="keperluan" required>
                         <option value="">Pilih Keperluan</option>
@@ -499,7 +483,6 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>NIM/NIP</th>
-                            <th>Program Studi</th>
                             <th>Keperluan</th>
                             <th>Waktu Masuk</th>
                             <th>Aksi</th>
@@ -604,14 +587,12 @@
             
             const nama = document.getElementById('nama').value;
             const nim = document.getElementById('nim').value;
-            const programStudi = document.getElementById('program_studi').value;
             const keperluan = document.getElementById('keperluan').value;
             
             const newVisitor = {
                 id: Date.now(),
                 nama: nama,
                 nim: nim,
-                programStudi: programStudi,
                 keperluan: keperluan,
                 waktuMasuk: getCurrentTime(),
                 tanggal: new Date().toLocaleDateString('id-ID'),
@@ -647,14 +628,13 @@
             const filteredVisitors = activeVisitors.filter(v => 
                 v.nama.toLowerCase().includes(searchTerm) ||
                 v.nim.toLowerCase().includes(searchTerm) ||
-                v.programStudi.toLowerCase().includes(searchTerm) ||
                 v.keperluan.toLowerCase().includes(searchTerm)
             );
             
             if (filteredVisitors.length === 0) {
                 visitorList.innerHTML = `
                     <tr>
-                        <td colspan="7" style="text-align: center; padding: 30px;">
+                        <td colspan="6" style="text-align: center; padding: 30px;">
                             <i class="fas fa-users" style="font-size: 48px; color: #ccc; margin-bottom: 10px; display: block;"></i>
                             Belum ada pengunjung hari ini
                         </td>
@@ -668,7 +648,6 @@
                     <td>${index + 1}</td>
                     <td>${visitor.nama}</td>
                     <td>${visitor.nim}</td>
-                    <td>${visitor.programStudi}</td>
                     <td>${visitor.keperluan}</td>
                     <td>${visitor.waktuMasuk}</td>
                     <td>
@@ -712,7 +691,7 @@
                 const visitorIndex = visitors.findIndex(v => v.id === currentExitId);
                 
                 if (visitorIndex !== -1) {
-                    // Hapus pengunjung dari daftar (atau bisa juga diubah statusnya menjadi inactive)
+                    // Hapus pengunjung dari daftar
                     visitors.splice(visitorIndex, 1);
                     localStorage.setItem('visitors', JSON.stringify(visitors));
                     
@@ -775,4 +754,4 @@
         cleanupOldData();
     </script>
 </body>
-</html>
+    </html>
